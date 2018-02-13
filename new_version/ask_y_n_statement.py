@@ -62,6 +62,6 @@ def ask_option(category, options):
         print(string)
         answer = input("Enter option number: ")
         check = answer in set(val)
-    ans_int = int(answer)-1
-    option = options[ans_int]
+    answer_no = int(answer)-1
+    option = options[answer_no]
     return option

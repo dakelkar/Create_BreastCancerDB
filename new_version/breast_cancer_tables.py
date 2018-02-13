@@ -11,9 +11,8 @@ def physical_activity_table(conn, cursor, file_number, mr_number, name):
         print("Add further activities?")
         add_act = input("(y/n): ")
 
-
 def cancer_table(conn, cursor, file_number, mr_number, name):
-    # add yes_no and NA. Remove yes no column
+    #add yes_no and NA. Remove yes no column
     from add_update_sql import insert
     table_cancer = "Previous_Cancer_History"
     add_cancer = "y"
@@ -24,53 +23,53 @@ def cancer_table(conn, cursor, file_number, mr_number, name):
         data = file_number, mr_number, name, type_of_cancer, year_diagnosis
         insert(conn, cursor, table_cancer, columns, data)
         surgery_y_n = input("Surgical treatment (y/n)?")
-        type_surgery = None
+        type_surgery = "No Surgery"
         if str.lower(surgery_y_n) == "y":
-            # surgery_y_n = "Surgical treatment"
+            surgery_y_n = "Surgical treatment"
             type_surgery = input("Type of surgery: ")
         radiation_y_n = input("Radiation Treatment (y/n): ")
-        type_radiation = None
-        duration_radiation = None
+        type_radiation = "No Radiation"
+        duration_radiation = "No Radiation"
         if str.lower(radiation_y_n) == "y":
-            # radiation_y_n = "Radiation Treatment"
+            radiation_y_n = "Radiation Treatment"
             type_radiation = input("Type of radiation: ")
             duration_radiation = input("Duration of treatment: ")
         chemotherapy_y_n = input("Chemotherapy Treatment (y/n): ")
-        type_chemotherapy = None
-        duration_chemotherapy = None
+        type_chemotherapy = "No Chemotherapy"
+        duration_chemotherapy = "No Chemotherapy"
         if str.lower(chemotherapy_y_n) == "y":
-            # chemotherapy_y_n = "Chemotherapy Treatment"
+            chemotherapy_y_n = "Chemotherapy Treatment"
             type_chemotherapy = input("Type of chemotherapy: ")
             duration_chemotherapy = input("Duration of treatment: ")
         hormone_y_n = input("Hormone Treatment (y/n): ")
-        type_hormone = None
-        duration_hormone = None
+        type_hormone = "No Hormone Treatment"
+        duration_hormone = "No Hormone Treatment"
         if str.lower(hormone_y_n) == "y":
-            # hormone_y_n = "Hormone Treatment"
+            hormone_y_n = "Hormone Treatment"
             type_hormone = input("Type of hormone: ")
             duration_hormone = input("Duration of treatment: ")
         alternative_y_n = input("Alternative Treatment (y/n): ")
-        type_alternative = None
-        duration_alternative = None
+        type_alternative = "No Alternative Treatment"
+        duration_alternative = "No Alternative Treatment"
         if str.lower(alternative_y_n) == "y":
-            # alternative_y_n = "Alternative Treatment"
+            alternative_y_n = "Alternative Treatment"
             type_alternative = input("Type of alternative medication: ")
             duration_alternative = input("Duration of treatment: ")
         home_y_n = input("Home Remedy (y/n): ")
-        type_home = None
-        duration_home = None
+        type_home = "No Home Remedy Treatment"
+        duration_home = "No Home Remedy Treatment"
         if str.lower(home_y_n) == "y":
-            # home_y_n = "Home Remedy Treatment"
+            home_y_n = "Home Remedy Treatment"
             type_home = input("Type of home remedy: ")
             duration_home = input("Duration of treatment: ")
-        columns = "File_number, MR_number, Name, Type_Cancer, Year_diagnosis, Type_Surgery," \
-                  "Type_Radiation,Duration_Radiation,Type_Chemotherapy,Duration_Chemotherapy," \
-                  "Type_Hormone, Duration_Hormone,Type_Alternative_Treatment, " \
-                  "Duration_Alternative_Treatment, Type_Home_Remedy, Duration_Home_Remedy"
-        new_data = file_number, mr_number, name, type_of_cancer, year_diagnosis, type_surgery, \
-                   type_radiation, duration_radiation, type_chemotherapy, \
-                   duration_chemotherapy, type_hormone, duration_hormone, \
-                   type_alternative, duration_alternative, type_home, duration_home
+        columns = "File_number, MR_number, Name, Type_Cancer, Year_diagnosis, Surgery, Type_Surgery,Radiation," \
+                  "Type_Radiation,Duration_Radiation, Chemotherapy, Type_Chemotherapy,Duration_Chemotherapy, Hormone, " \
+                  "Type_Hormone, Duration_Hormone, Alternative_Treatment,Type_Alternative_Treatment, " \
+                  "Duration_Alternative_Treatment, Home_Remedy,Type_Home_Remedy, Duration_Home_Remedy"
+        new_data = file_number, mr_number, name, type_of_cancer, year_diagnosis, surgery_y_n, type_surgery, \
+                   radiation_y_n, type_radiation, duration_radiation, chemotherapy_y_n, type_chemotherapy, \
+                   duration_chemotherapy, hormone_y_n, type_hormone, duration_hormone, alternative_y_n, \
+                   type_alternative, duration_alternative, home_y_n, type_home, duration_home
         insert(conn, cursor, table_cancer, columns, new_data)
         print("Additional cancer history")
         add_cancer = input("y/n: ")
@@ -92,7 +91,7 @@ def nut_supp_table(conn, cursor, file_number, mr_number, name):
         add_supp = input('y/n: ')
 
 
-def med_history_table(conn, cursor, file_number, mr_number, name):
+def med_history_table (conn, cursor, file_number, mr_number, name):
     from add_update_sql import insert
     add_history = "y"
     while (str.lower(add_history) == "y"):
@@ -108,31 +107,40 @@ def med_history_table(conn, cursor, file_number, mr_number, name):
 
 
 def family_cancer_table(conn, cursor, file_number, mr_number, name):
-    from ask_y_n_statement import ask_option
-    from add_update_sql import insert
     add_family = "y"
-    all_data = []
+    # all_data = []
     while str.lower(add_family) == "y":
         type_of_cancer = input("Type of Cancer: ")
-        category = ("Relation to patient")
-        options = ["Immediate Family", "Maternal Family", "Paternal Family"]
-        relation_to_patient = ask_option(category, options)
-        type_relation = input("Specific Relationship:")
+        relation_to_patient = input('Relation_to_patient :')
         age_at_detection_yrs = input('Age at detection (yrs)" :')
-        family_history = file_number, mr_number, name, type_of_cancer, relation_to_patient, type_relation, age_at_detection_yrs
-        #family_history_list = [type_of_cancer, relation_to_patient, type_relation, age_at_detection_yrs]
-        #all_data.append(family_history_list)
-        columns = 'File_number, MR_number, Name, Type_Cancer, Relation_to_Patient, Type_Relation, Age_at_detection_yrs'
-        table = "Family_Cancer_History"
-        insert(conn, cursor, table, columns, family_history)
+        family_history = file_number, mr_number, name, type_of_cancer, relation_to_patient, age_at_detection_yrs
+        #	family_history_list = [file_number, mr_number, name, type_of_cancer, relation_to_patient, age_at_detection_yrs]
+        #	all_data.append(family_history_list)
+        cursor.execute(
+            'INSERT INTO Family_Cancer_History (File_number, MR_number, Name, Type_Cancer, Relation_to_patient, Age_at_detection_yrs) VALUES (?, ?, ?, ?, ?, ?)',
+            family_history)
+        conn.commit()
         print("Add more family cancer history? ")
         add_family = input("y/n: ")
+
+
+# type_of_cancer = get_rb_lb(all_data, 3)
+# relation_to_patient = get_rb_lb(all_data, 4)
+# age_at_detection_yrs = get_rb_lb (all_data, 5)
+# data = [type_of_cancer, relation_to_patient, age_at_detection_yrs]
+# for index in range(0,len(data)):
+# data[index] = ["; ".join(data[index])]
+# data_flat = [item for sublist in data for item in sublist]
+# new_data = tuple(data_flat)
+# columns = "Family_Type_Cancer","Relation_to_patient", "Age_at_detection_yrs"
+# table = "Patient_Information_History"
+# update_multiple (conn, cursor, table, columns, file_number, data)
 
 
 def other_symp(conn, cursor, file_number, table):
     from add_update_sql import update_multiple
     from ask_y_n_statement import get_rb_lb
-    # data = file_number, mr_number, name
+    #data = file_number, mr_number, name
     add_symp = "y"
     all_data = []
     while str.lower(add_symp) == "y":
@@ -163,6 +171,7 @@ def other_symp(conn, cursor, file_number, table):
     lb = get_rb_lb(all_data, 1)
     lb_symp = list(filter(None, get_rb_lb(lb, 0)))
     lb_dur = list(filter(None, get_rb_lb(lb, 1)))
+    data = [rb_symp, rb_dur, lb_symp, lb_dur]
     data = [rb_symp, rb_dur, lb_symp, lb_dur]
     for index in range(0, len(data)):
         if not data[index]:

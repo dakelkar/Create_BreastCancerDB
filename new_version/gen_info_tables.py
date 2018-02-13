@@ -150,10 +150,10 @@ def habits (conn, cursor, file_number, table):
 	from add_update_sql import update_multiple, update_single
 	alcohol = input ("Alcohol consumption (y/n): ")
 	alcohol_consump = "No Alcohol Consumption"
-	alcohol_age= "NA"
-	alcohol_quant = "NA"
-	alcohol_duration = "NA"
-	alcohol_comments = "NA"
+	alcohol_age= "No Alcohol Consumption"
+	alcohol_quant = "No Alcohol Consumption"
+	alcohol_duration = "No Alcohol Consumption"
+	alcohol_comments = "No Alcohol Consumption"
 	if str.lower(alcohol) == "y":
 		alcohol_consump = "Alcohol Consumption"
 		alcohol_age= input ("Consumption of alcohol from which age (yrs): ")
@@ -164,11 +164,11 @@ def habits (conn, cursor, file_number, table):
 	new_data = alcohol_consump, alcohol_age, alcohol_quant, alcohol_duration, alcohol_comments
 	update_multiple (conn, cursor, table, columns, file_number, new_data)
 	tobacco = input ("Tobacco consumption (y/n)")
-	tobacco_type = "NA"
-	tobacco_age= "NA"
-	tobacco_quant = "NA"
-	tobacco_duration = "NA"
-	tobacco_comments = "NA"
+	tobacco_type = "No Tobacco Consumption"
+	tobacco_age= "No Tobacco Consumption"
+	tobacco_quant = "No Tobacco Consumption"
+	tobacco_duration = "No Tobacco Consumption"
+	tobacco_comments = "No Tobacco Consumption"
 	if str.lower(tobacco) == "y":
 		tobacco = ("Tobacco consumption")
 		tobacco_type = input ("Type of tobacco consumption: ")
@@ -194,7 +194,7 @@ def metastasis_symp (conn, cursor, file_number, table):
 	else:
 		met_bone = input ("Bone Pain (y/n): ")
 		if str.lower(met_bone) == "y":
-			met.append(["Bone Pain"])
+			met = ["Bone Pain"]
 		met_cough = input ("Cough (y/n): ")
 		if str.lower(met_cough) == "y":
 			met.append(["Cough"]) 
@@ -204,9 +204,9 @@ def metastasis_symp (conn, cursor, file_number, table):
 		met_headache = input ("Headache (y/n): ")
 		if str.lower(met_headache) == "y":
 			met.append(["Headache"])
-		met_weight = input ("WeightLoss (y/n): ")
+		met_weight = input ("Weightloss (y/n): ")
 		if str.lower(met_weight) == "y":
-			met.append(["WeightLoss"])
+			met.append(["Weightloss"])
 	met_flat = [item for sublist in met for item in sublist]
 	data_met = "; ".join(met_flat)
 	update_single (conn, cursor, table, "Metatasis_Symptoms", file_number, data_met)

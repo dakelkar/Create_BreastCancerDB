@@ -2,14 +2,12 @@ import sqlite3
 from breast_cancer_tables import *
 from gen_info_tables import *
 from add_update_sql import *
-from block_report_data import *
-db_name = 'DB\\PCCM_BreastCancerDB_2018-02-13.db'
+db_name = 'DB\\BreastCancerDB_test_2018-02-12.db'
 conn = sqlite3.connect(db_name)
 cursor = conn.cursor()
 new = "y"
 while str.lower(new) == "y":
     print("Please enter new record")
-    print ("Patient Information")
     file_number = input("File Number: ")
     mr_number = input('MR_number :')
     name = input('Name :')
@@ -34,11 +32,9 @@ while str.lower(new) == "y":
                age_yrs, date_of_birth, height_cm, weight_kg, BMI, diet
     table = "Patient_Information_History"
     insert(conn, cursor, table, columns, new_data)
-    print("Patient habits")
     habits(conn, cursor, file_number, table)
     nut_supplements(conn, cursor, file_number, mr_number, name, table)
     phys_act(conn, cursor, file_number, mr_number, name, table)
-    print("Patient and family medical history")
     med_history(conn, cursor, file_number, mr_number, name, table)
     cancer_history(conn, cursor, file_number, mr_number, name, table)
     family_details(conn, cursor, file_number, table)
@@ -52,17 +48,11 @@ while str.lower(new) == "y":
     repro_details(conn, cursor, file_number, table)
     symp_state = "Pain or tenderness", "Lumps", "Nipple Discharge", "Nipple Retraction", "Dimpling",\
                  "Discolouration", "Ulceration", "Eczema"
-    print("Patient Symptoms")
     breast_symptoms(conn, cursor, file_number, table, symp_state)
+
     det_by(conn, cursor, table, file_number)
     metastasis_symp(conn, cursor, file_number, table)
-    print("Block Report")
-    block_report_info(conn, cursor, file_number, table)
-    print("Tumour Biopsy")
-    tumour_biopsy_data(conn, cursor, file_number, table)
-    print("Lymphnode Biopsy")
-    lymphnode_biopsy(conn, cursor, file_number, table)
-    surgery_info(conn, cursor, file_number, table)
+    block_report (conn, cursor, file_number, table)
     print("Enter next new record?")
     new = input("y/n: ")
 conn.close()

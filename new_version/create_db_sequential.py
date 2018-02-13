@@ -2,7 +2,7 @@ import sqlite3
 from add_update_sql import add_columns
 from datetime import date
 
-db_name = "DB\PCCM_BreastCancerDB_" + str(date.today()) + '.db'
+db_name = "BreastCancerDB_" + str(date.today()) + '.db'
 conn = sqlite3.connect(db_name)
 cursor = conn.cursor()
 table_name1 = "Patient_Information_History"
@@ -54,14 +54,14 @@ columns2 = "File_number, MR_number, Name, Condition, Diagnosis_date, Treatment"
 cursor.execute('CREATE TABLE {tn} ({nf})'\
 				.format(tn=table_name2, nf=columns2))
 table_name3 = "Family_Cancer_History"
-columns3 = 'File_number, MR_number, Name, Type_Cancer, Relation_to_Patient, Type_Relation, Age_at_detection_yrs'
+columns3 = "File_number, MR_number, Name, Type_Cancer, Relation_to_patient, Age_at_detection_yrs"
 cursor.execute('CREATE TABLE {tn} ({nf})'\
 				.format(tn=table_name3, nf=columns3))
 table_name4 = "Previous_Cancer_History"
-columns4 = "File_number, MR_number, Name, Type_Cancer, Year_diagnosis, Type_Surgery," \
-                  "Type_Radiation,Duration_Radiation,Type_Chemotherapy,Duration_Chemotherapy," \
-                  "Type_Hormone, Duration_Hormone,Type_Alternative_Treatment, " \
-                  "Duration_Alternative_Treatment, Type_Home_Remedy, Duration_Home_Remedy"
+columns4 = "File_number, MR_number, Name, Type_Cancer, Year_diagnosis, Surgery, Type_Surgery, " \
+		   "Radiation, Type_Radiation, Duration_Radiation, Chemotherapy, Type_Chemotherapy, " \
+		   "Duration_Chemotherapy, Hormone, Type_Hormone, Duration_Hormone, Alternative_Treatment, " \
+		   "Type_Alternative_Treatment, Duration_Alternative_Treatment, Home_Remedy, Type_Home_Remedy, Duration_Home_Remedy"
 cursor.execute('CREATE TABLE {tn} ({nf})'\
 				.format(tn = table_name4, nf = columns4))
 table_name5 = "Nutritional_Supplements"
