@@ -62,6 +62,26 @@ def ask_option(category, options):
         print(string)
         answer = input("Enter option number: ")
         check = answer in set(val)
-    ans_int = int(answer)-1
-    option = options[ans_int]
+    ans_int = int(answer) - 1
+    option_ = options[ans_int]
+    if option_ == "Other":
+        option = input("Details: ")
+    else:
+        option = option_
+    return option
+
+
+def ask_y_n(question, yes_ans = True, no_ans = False):
+    option_list = ["1. Yes", "2. No"]
+    option_flat = " ".join(option_list)
+    check = False
+    while not check:
+        print(question)
+        print(option_flat)
+        answer = input("Enter option number: ")
+        check = answer in {"1", "2"}
+    if answer == "1":
+        option = yes_ans
+    else:
+        option = no_ans
     return option

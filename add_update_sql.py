@@ -30,3 +30,11 @@ def add_columns(cursor, table, columns):
     for index in range(0, col_number):
         sql_add = "ALTER TABLE " + table + " ADD " + columns[index]
         cursor.execute(sql_add)
+
+def review_input (file_number, columns, data):
+    from ask_y_n_statement import ask_y_n
+    col_number = len (data)
+    for index in range (0, col_number):
+        print (columns[index] +": " + data[index])
+    ans = ask_y_n("Are entries for file "+ file_number+ " correct ?", True, False)
+    return ans
